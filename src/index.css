@@ -1,0 +1,4 @@
+/* Certifique-se de que o TailwindCSS está configurado corretamente no arquivo tailwind.config.js */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
