@@ -1,4 +1,30 @@
+import Splide from '@splidejs/splide';
+import '@splidejs/splide/dist/css/splide.min.css';
+import { useEffect } from 'react';
+
 function MainPage() {
+    useEffect(() => {
+        new Splide('#image-carousel', {
+            type: 'loop',
+            perPage: 4,
+            gap: '0.5rem', 
+            clones: 0,
+            pagination: true,
+            arrows: false,
+            breakpoints: {
+                768: {
+                    perPage: 2,
+                    gap: '0.25rem', 
+                    fixedWidth: '8rem', 
+                    fixedHeight: '8rem', 
+                    height: 'auto',
+                    focus: 'center',
+                },
+            },
+        }).mount();
+    }, []);
+    
+
     return (
         <main>
             <section className="p-8 md:pl-60 md:pr-60 text-start bg-[#2987c5] text-white flex flex-col-reverse md:flex-row justify-start items-center min-h-[80vh]">
@@ -49,34 +75,38 @@ function MainPage() {
                 <section id="services-section" className="bg-[#fcfdfd] p-8 md:pl-60 md:pr-60 text-start flex flex-col md:flex-row gap-6 items-center">
                     <div className="flex-1">
                         <h2 className="text-2xl md:text-3xl font-bold">Nossos Serviços</h2>
-                        <p className="text-base md:text-lg">Na 3D Inova Lab, oferecemos uma variedade de serviços personalizados para atender desde projetos simples até os mais complexos:</p>
+                        <p className="text-base md:text-lg">Na 3D Inova Lab, oferecemos soluções personalizadas para atender desde projetos simples até os mais complexos:</p>
                         <ul className="list-none pl-0 text-base md:text-lg mt-3">
                             <li className="flex items-start gap-2">
                                 <img src="assets/check.png" alt="Check Icon" className="w-6 h-6 mt-1" />
                                 <strong>Impressão 3D sob demanda:</strong>
                             </li>
-                            <p>Peças técnicas, protótipos e itens personalizados com precisão milimétrica.</p>
-
+                            <p>Peças técnicas, protótipos, chaveiros, itens personalizados e peças para fundição, todos com precisão milimétrica.</p>
                             <li className="flex items-start gap-2 mt-2">
                                 <img src="assets/check.png" alt="Check Icon" className="w-6 h-6 mt-1" />
                                 <strong>Modelagem 3D:</strong>
                             </li>
-                            <p>Transformamos suas ideias em arquivos prontos para impressão com design funcional e estético.</p>
+                            <p>Transformamos suas ideias em arquivos prontos para impressão, com design funcional, estético e adequado para joalheria e fundição.</p>
                             <li className="flex items-start gap-2 mt-2">
                                 <img src="assets/check.png" alt="Check Icon" className="w-6 h-6 mt-1" />
                                 <strong>Prototipagem rápida:</strong>
                             </li>
-                            <p>Ideal para startups, engenheiros e designers que precisam validar ideias com agilidade.</p>
+                            <p>Ideal para startups, engenheiros e designers que precisam validar suas ideias com agilidade.</p>
                             <li className="flex items-start gap-2 mt-2">
                                 <img src="assets/check.png" alt="Check Icon" className="w-6 h-6 mt-1" />
                                 <strong>Miniaturas e maquetes:</strong>
                             </li>
-                            <p>Perfeitas para arquitetura, educação e colecionadores.</p>
+                            <p>Perfeitas para projetos de arquitetura, educação, colecionadores e exposições.</p>
+                            <li className="flex items-start gap-2 mt-2">
+                                <img src="assets/check.png" alt="Check Icon" className="w-6 h-6 mt-1" />
+                                <strong>Joalheria e moldes:</strong>
+                            </li>
+                            <p>Criação de modelos 3D detalhados para fabricação de joias exclusivas e moldes para fundição.</p>
                             <li className="flex items-start gap-2 mt-2">
                                 <img src="assets/check.png" alt="Check Icon" className="w-6 h-6 mt-1" />
                                 <strong>Consultoria técnica:</strong>
                             </li>
-                            <p>Orientamos você sobre o melhor material, tipo de impressão e otimizações para seu projeto.</p>
+                            <p>Orientamos você na escolha do melhor material, tipo de impressão e otimizações para o seu projeto.</p>
                         </ul>
                     </div>
                     <div className="flex-1">
@@ -93,11 +123,8 @@ function MainPage() {
 
                 <section className="p-8 md:pl-60 md:pr-60 text-start flex flex-col md:flex-row gap-6 items-center">
                     <div className="flex-1">
-                        <img src="assets/porque-escolher.png" alt="Por que escolher" className="w-full h-auto" />
-                    </div>
-                    <div className="flex-1">
                         <h2 className="text-2xl md:text-3xl font-bold mb-4">Por que escolher a gente?</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="">
                             <div className="flex items-start gap-2">
                                 <img src="assets/check.png" alt="Check Icon" className="w-6 h-6 mt-[2px]" />
                                 Alta precisão e qualidade profissional
@@ -119,6 +146,118 @@ function MainPage() {
                                 Experiência e paixão por inovação
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                <section className="p-8 md:pl-60 md:pr-60 text-start flex flex-col gap-6 items-start">
+                    <div id="image-carousel" className="splide">
+                        <div className="splide__track">
+                            <ul className="splide__list">
+                                {['ref1.jpg', 'ref2.jpg', 'ref3.jpg', 'ref4.jpg'].map((image, index) => (
+                                    <li key={index} className="splide__slide">
+                                        {image === 'ref4.jpg' ? (
+                                            <div
+                                                className="relative cursor-pointer"
+                                                onClick={() => {
+                                                    const modal = document.getElementById('video-modal');
+                                                    if (modal) {
+                                                        modal.style.display = 'flex';
+                                                    }
+                                                }}
+                                            >
+                                                <img
+                                                    src={`assets/${image}`}
+                                                    alt="Video Thumbnail"
+                                                    className="w-32 h-32 md:w-48 md:h-48 object-cover"
+                                                />
+                                                <div className="absolute inset-0 flex items-center justify-center">
+                                                    <img
+                                                        src="assets/player.png"
+                                                        alt="Play Icon"
+                                                        className="w-12 h-12 md:w-16 md:h-16"
+                                                    />
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div
+                                                className="relative cursor-pointer"
+                                                onClick={() => {
+                                                    const modal = document.getElementById(`modal-${index}`);
+                                                    if (modal) {
+                                                        modal.style.display = 'flex';
+                                                    }
+                                                }}
+                                            >
+                                                <img
+                                                    src={`assets/${image}`}
+                                                    alt={`Slide ${index + 1}`}
+                                                    className="w-32 h-32 md:w-48 md:h-48 object-cover"
+                                                />
+                                            </div>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Image Modals */}
+                    {['ref1.jpg', 'ref2.jpg', 'ref3.jpg'].map((image, index) => (
+                        <div
+                            key={index}
+                            id={`modal-${index}`}
+                            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center hidden z-50"
+                            onClick={(e) => {
+                                if ((e.target as HTMLElement).id === `modal-${index}`) {
+                                    (e.target as HTMLElement).style.display = 'none';
+                                }
+                            }}
+                        >
+                            <button
+                                className="absolute top-4 right-4 bg-white text-black font-bold py-1 px-3 rounded hover:bg-gray-200"
+                                onClick={() => {
+                                    const modal = document.getElementById(`modal-${index}`);
+                                    if (modal) {
+                                        modal.style.display = 'none';
+                                    }
+                                }}
+                            >
+                                X
+                            </button>
+                            <img
+                                src={`assets/${image}`}
+                                alt={`Expanded Slide ${index + 1}`}
+                                className="max-w-[90%] max-h-[90%] object-contain"
+                            />
+                        </div>
+                    ))}
+
+                    {/* Video Modal */}
+                    <div
+                        id="video-modal"
+                        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center hidden z-50"
+                        onClick={(e) => {
+                            if ((e.target as HTMLElement).id === 'video-modal') {
+                                (e.target as HTMLElement).style.display = 'none';
+                            }
+                        }}
+                    >
+                        <button
+                            className="absolute top-4 right-4 bg-white text-black font-bold py-1 px-3 rounded hover:bg-gray-200"
+                            onClick={() => {
+                                const modal = document.getElementById('video-modal');
+                                if (modal) {
+                                    modal.style.display = 'none';
+                                }
+                            }}
+                        >
+                            X
+                        </button>
+                        <video
+                            src="assets/ref4.mp4"
+                            controls
+                            className="max-w-[90%] max-h-[90%]"
+                        />
                     </div>
                 </section>
 
