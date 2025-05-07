@@ -18,7 +18,7 @@ function Footer() {
                 email: formData.get('email'),
                 telefone: formData.get('telefone'),
                 mensagem: formData.get('mensagem'),
-                reply_to: formData.get('email'), // Adiciona o e-mail do remetente no campo reply_to
+                reply_to: formData.get('email'), 
             },
         };
 
@@ -74,7 +74,7 @@ function Footer() {
                                 <ul>
                                     <li>
                                         <a href="mailto:contato@inovalab.com" className="hover:underline">
-                                            E-mail: contato@3dinovalab.com
+                                            E-mail: contato@3dinovalab.com.br
                                         </a>
                                     </li>
                                     <li>
