@@ -4,8 +4,8 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { service_id, template_id, user_id, template_params } = req.body;
 
-        if (!service_id || !template_id || !user_id || !template_params) {
-            return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
+        if (!service_id || !template_id || !user_id || !template_params || !template_params.email) {
+            return res.status(400).json({ error: 'Todos os campos são obrigatórios, incluindo o e-mail.' });
         }
 
         try {
@@ -25,6 +25,8 @@ export default async function handler(req, res) {
             if (response.ok) {
                 return res.status(200).json({ message: 'E-mail enviado com sucesso!' });
             } else {
+                const errorText = await response.text();
+                console.error('Erro ao enviar e-mail:', errorText);
                 return res.status(500).json({ error: 'Erro ao enviar o e-mail.' });
             }
         } catch (error) {

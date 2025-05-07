@@ -37,10 +37,10 @@ function MainPage() {
                             if (section) {
                                 section.scrollIntoView({ behavior: 'smooth' });
                             }
-                        }} className="bg-white text-[#2987c5] font-bold py-2 px-4 rounded hover:bg-gray-200">
+                        }} style={{transition: "0.5s" }} className="bg-transparent text-white hover:text-[#2987c5] px-4 py-2 rounded hover:bg-gray-200 border-white border">
                             Solicite um Orçamento
                         </button>
-                        <button className="bg-white text-[#2987c5] font-bold py-2 px-4 rounded hover:bg-gray-200" onClick={() => {
+                        <button style={{transition: "0.5s" }} className="bg-transparent text-white hover:text-[#2987c5] px-4 py-2 rounded hover:bg-gray-200 border-white border" onClick={() => {
                             const section = document.getElementById('services-section');
                             if (section) {
                                 section.scrollIntoView({ behavior: 'smooth' });

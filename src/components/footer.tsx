@@ -15,10 +15,18 @@ function Footer() {
             user_id: '3E9jY3jyHdKIXIH26', // Substitua pelo ID do usuário do EmailJS
             template_params: {
                 nome: formData.get('nome'),
+                email: formData.get('email'),
                 telefone: formData.get('telefone'),
                 mensagem: formData.get('mensagem'),
+                reply_to: formData.get('email'), // Adiciona o e-mail do remetente no campo reply_to
             },
         };
+
+        if (!data.template_params.email) {
+            console.error('O campo de e-mail é obrigatório.');
+            setFormStatus('error');
+            return;
+        }
 
         try {
             const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
@@ -33,6 +41,13 @@ function Footer() {
                 setFormStatus('success');
                 form.reset();
             } else {
+                const text = await response.text();
+                try {
+                    const errorData = JSON.parse(text);
+                    console.error('Erro ao enviar e-mail:', errorData);
+                } catch (parseError) {
+                    console.error('Erro inesperado na resposta:', text);
+                }
                 setFormStatus('error');
             }
         } catch (error) {
@@ -49,11 +64,24 @@ function Footer() {
                         <img src="/assets/logo2.png" alt="Inova Lab Logo" className="h-14 w-48" />
                         <div className="flex flex-col md:flex-row gap-8">
                             <div className="ml-6 mt-4">
-                                <h3 className="font-bold text-lg mb-4">Navegue na página</h3>
-                                <ul className="space-y-2">
+                                <h3 className="font-bold text-lg mb-2">Navegue na página</h3>
+                                <ul>
                                     <li><a href="#sobre-nos" className="hover:underline">Sobre nós</a></li>
                                     <li><a href="#services-section" className="hover:underline">Nossos Serviços</a></li>
                                     <li><a href="#orcamentos" className="hover:underline">Orçamentos</a></li>
+                                </ul>
+                                <h3 className="font-bold text-lg mb-2 mt-8">Suporte</h3>
+                                <ul>
+                                    <li>
+                                        <a href="mailto:contato@inovalab.com" className="hover:underline">
+                                            E-mail: contato@3dinovalab.com
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tel:+5519991100307" className="hover:underline">
+                                            Telefone: +55 19 99110-0307
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

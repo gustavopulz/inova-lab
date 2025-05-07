@@ -32,8 +32,8 @@ function Header() {
             </nav>
             <a
                 href="#services-section"
-                className="hidden md:block bg-white text-[#2987c5] px-4 py-2 rounded hover:bg-gray-200"
-            >
+                style={{transition: "0.5s" }}
+                className="hidden md:block bg-transparent text-white hover:text-[#2987c5] px-4 py-2 rounded hover:bg-gray-200 border-white border" >
                 Contratar serviço
             </a>
         </header>
