@@ -10,7 +10,6 @@ const PORT = 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Rota para envio de e-mail
 app.post('/api/send-email', async (req, res) => {
     const { nome, telefone, mensagem } = req.body;
 
@@ -20,16 +19,16 @@ app.post('/api/send-email', async (req, res) => {
 
     try {
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            service: 'outlook',
             auth: {
-                user: 'seu-email@gmail.com', // Substitua pelo seu e-mail
-                pass: 'sua-senha', // Substitua pela sua senha ou app password
+                user: 'contato@3dinovalab.com.br', // Substitua pelo seu e-mail
+                pass: 'Kadu@2024', // Substitua pela sua senha ou app password
             },
-        });
+    });
 
         const mailOptions = {
-            from: 'seu-email@gmail.com',
-            to: 'pulzgustavo1@gmail.com',
+            from: 'contato@3dinovalab.com.br',
+            to: 'contato@3dinovalab.com.br',
             subject: 'Nova mensagem do formulário de contato',
             text: `Nome: ${nome}\nTelefone: ${telefone}\nMensagem: ${mensagem}`,
         };

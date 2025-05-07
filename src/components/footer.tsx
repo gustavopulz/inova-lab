@@ -1,4 +1,3 @@
-import emailjs from 'emailjs-com';
 import { useState } from 'react';
 
 function Footer() {
@@ -11,22 +10,31 @@ function Footer() {
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
         const data = {
-            nome: formData.get('nome'),
-            telefone: formData.get('telefone'),
-            email: formData.get('email'),
-            mensagem: formData.get('mensagem'),
+            service_id: 'service_mmgz4eq', // Substitua pelo ID do serviço do EmailJS
+            template_id: 'template_jq77qef', // Substitua pelo ID do template do EmailJS
+            user_id: '3E9jY3jyHdKIXIH26', // Substitua pelo ID do usuário do EmailJS
+            template_params: {
+                nome: formData.get('nome'),
+                telefone: formData.get('telefone'),
+                mensagem: formData.get('mensagem'),
+            },
         };
 
         try {
-            await emailjs.send(
-                'service_uznbz03', // Substitua pelo seu service_id
-                'template_181nyyg', // Substitua pelo seu template_id
-                data,
-                'nVe61kbMK0Ug7lk2Y' // Substitua pelo seu user_id
-            );
+            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
 
-            setFormStatus('success');
-            form.reset();
+            if (response.ok) {
+                setFormStatus('success');
+                form.reset();
+            } else {
+                setFormStatus('error');
+            }
         } catch (error) {
             console.error('Erro ao enviar e-mail:', error);
             setFormStatus('error');
