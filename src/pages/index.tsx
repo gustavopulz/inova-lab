@@ -6,8 +6,8 @@ function MainPage() {
     useEffect(() => {
         new Splide('#image-carousel', {
             type: 'loop',
-            perPage: 4,
-            gap: '0.5rem', 
+            perPage: 8,
+            gap: '0.1rem', 
             clones: 0,
             pagination: true,
             arrows: false,
@@ -24,7 +24,6 @@ function MainPage() {
         }).mount();
     }, []);
     
-
     return (
         <main>
             <section className="p-8 md:pl-60 md:pr-60 text-start bg-[#2987c5] text-white flex flex-col-reverse md:flex-row justify-start items-center min-h-[80vh]">
@@ -153,9 +152,9 @@ function MainPage() {
                     <div id="image-carousel" className="splide">
                         <div className="splide__track">
                             <ul className="splide__list">
-                                {['ref1.jpg', 'ref2.jpg', 'ref3.jpg', 'ref4.jpg'].map((image, index) => (
+                                {['ref_1.jpg', 'ref_2.jpg', 'ref_3.jpg', 'ref_4.jpg', 'ref_5.jpg', 'ref_6.jpg', 'ref_7.jpg', 'ref_8.jpg', 'ref_9.jpg', 'ref_10.jpg', 'ref_11.jpg', 'ref_12.jpg', 'ref_13.jpg'].map((image, index) => (
                                     <li key={index} className="splide__slide">
-                                        {image === 'ref4.jpg' ? (
+                                        {image === 'ref_99.jpg' ? (
                                             <div
                                                 className="relative cursor-pointer"
                                                 onClick={() => {
@@ -202,7 +201,7 @@ function MainPage() {
                     </div>
 
                     {/* Image Modals */}
-                    {['ref1.jpg', 'ref2.jpg', 'ref3.jpg'].map((image, index) => (
+                    {['ref_1.jpg', 'ref_2.jpg', 'ref_3.jpg', 'ref_4.jpg', 'ref_5.jpg', 'ref_6.jpg', 'ref_7.jpg', 'ref_8.jpg', 'ref_9.jpg', 'ref_10.jpg', 'ref_11.jpg', 'ref_12.jpg', 'ref_13.jpg'].map((image, index) => (
                         <div
                             key={index}
                             id={`modal-${index}`}
