@@ -1,7 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Footer() {
     const [formStatus, setFormStatus] = useState('');
+    const [showCookieBanner, setShowCookieBanner] = useState(false);
+
+    useEffect(() => {
+        const accepted = localStorage.getItem('cookieAccepted');
+        if (!accepted) {
+            setShowCookieBanner(true);
+        }
+    }, []);
+
+    const handleAcceptCookies = () => {
+        localStorage.setItem('cookieAccepted', 'true');
+        setShowCookieBanner(false);
+    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
@@ -58,6 +71,13 @@ function Footer() {
 
     return (
         <footer className="bg-[#2987c5] text-white px-8 md:pl-60 md:pr-60 py-8 pt-14">
+            {/* Cookie Banner */}
+            {showCookieBanner && (
+                <div className="fixed bottom-0 left-0 w-full bg-gray-900 bg-opacity-90 text-white flex flex-col md:flex-row items-center justify-between px-4 py-3 z-50">
+                    <span className="mb-2 md:mb-0">Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa política de cookies.</span>
+                    <button onClick={handleAcceptCookies} className="bg-[#2987c5] text-white px-4 py-2 rounded hover:bg-[#206ba0] ml-0 md:ml-4 mt-2 md:mt-0">Aceitar</button>
+                </div>
+            )}
             <div className="flex flex-col md:flex-row justify-between items-start gap-8">
                 <div className="flex flex-col md:flex-row gap-8 w-full">
                     <div className="flex flex-col gap-4 w-full md:w-1/2">
